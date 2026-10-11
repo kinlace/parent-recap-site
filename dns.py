@@ -30,7 +30,8 @@ def call(path, **body):
         data=json.dumps(body).encode(),
         headers={"Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req) as resp:
+    # Porkbun sometimes never answers; fail instead of hanging so a re-run can pick up
+    with urllib.request.urlopen(req, timeout=30) as resp:
         out = json.load(resp)
     if out.get("status") != "SUCCESS":
         sys.exit(f"{path}: {out.get('message', out)}")
@@ -51,18 +52,27 @@ def main():
     print("Zone now:")
     show(records)
 
-    targets = {DOMAIN, f"www.{DOMAIN}"}
-    drop = [r for r in records if r["name"] in targets and r["type"] in ADDRESS_TYPES]
-    add = [("", "A", ip) for ip in A] + [("", "AAAA", ip) for ip in AAAA]
-    add.append(("www", "CNAME", f"{ORG}.github.io"))
+    want = [("", "A", ip) for ip in A] + [("", "AAAA", ip) for ip in AAAA]
+    want.append(("www", "CNAME", f"{ORG}.github.io"))
     if challenge:
-        add.append((f"_github-pages-challenge-{ORG}", "TXT", challenge))
+        want.append((f"_github-pages-challenge-{ORG}", "TXT", challenge))
+
+    # Compare against what is already there, so a re-run after a partial apply only does the rest
+    full = lambda name: f"{name}.{DOMAIN}" if name else DOMAIN
+    wanted = {(full(n), t, c) for n, t, c in want}
+    have = {(r["name"], r["type"], r["content"]) for r in records}
+    targets = {DOMAIN, f"www.{DOMAIN}"}
+    drop = [
+        r for r in records
+        if r["name"] in targets and r["type"] in ADDRESS_TYPES and (r["name"], r["type"], r["content"]) not in wanted
+    ]
+    add = [(n, t, c) for n, t, c in want if (full(n), t, c) not in have]
 
     print("\nDelete:")
     show(drop)
     print("Create:")
     for name, rtype, content in add:
-        print(f"  {(name + '.' if name else '') + DOMAIN:<40} {rtype:<6} {content}")
+        print(f"  {full(name):<40} {rtype:<6} {content}")
 
     if not apply:
         print("\nDry run. Re-run with --apply to make these changes.")
@@ -71,6 +81,7 @@ def main():
     for r in drop:
         call(f"dns/delete/{DOMAIN}/{r['id']}")
     for name, rtype, content in add:
+        print(f"creating {full(name)} {rtype}", flush=True)
         call(f"dns/create/{DOMAIN}", name=name, type=rtype, content=content, ttl="600")
 
     print("\nZone after:")
