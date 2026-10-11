@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Parent Recap</title>
+<meta name="description" content="One short email every evening about your kids' school and clubs, written on your own Mac from school mail, Wilma, WhatsApp parent groups and MyClub.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23C8731A'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#EDF0F3; --panel:#FFFFFF; --panel-2:#F5F7F9; --ink:#12161B; --ink-2:#39414B; --muted:#6A7380;
+  --line:#D8DDE4; --accent:#C8731A; --accent-soft:#FBEAD5; --bad:#B8392B; --bad-soft:#F8E1DD;
+  --good:#2C7A57; --chip:#E3E7EC; --chip-on:#12161B; --chip-on-ink:#FFFFFF; --bezel:#0D0F12;
+  --shadow:0 1px 0 rgba(18,22,27,.04),0 12px 32px -18px rgba(18,22,27,.35);
+  --display:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --body:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sys:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --pw:clamp(250px,23vw,300px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1014; --panel:#161A20; --panel-2:#1C2128; --ink:#E8EBEF; --ink-2:#C3C9D1; --muted:#8B94A0;
+    --line:#2A3139; --accent:#EFA24A; --accent-soft:#3A2913; --bad:#E2705F; --bad-soft:#3A1E1A;
+    --good:#5DBB8E; --chip:#232930; --chip-on:#E8EBEF; --chip-on-ink:#0D1014; --bezel:#000000;
+    --shadow:0 1px 0 rgba(0,0,0,.3),0 16px 36px -20px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1014; --panel:#161A20; --panel-2:#1C2128; --ink:#E8EBEF; --ink-2:#C3C9D1; --muted:#8B94A0;
+  --line:#2A3139; --accent:#EFA24A; --accent-soft:#3A2913; --bad:#E2705F; --bad-soft:#3A1E1A;
+  --good:#5DBB8E; --chip:#232930; --chip-on:#E8EBEF; --chip-on-ink:#0D1014; --bezel:#000000;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 16px 36px -20px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}
+/* phone */
+.phone{width:var(--pw);aspect-ratio:300/620;background:var(--bezel);border-radius:46px;padding:11px;box-shadow:0 30px 60px -30px rgba(10,14,20,.55),inset 0 0 0 2px #2a2e34}
+.screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff;font-family:var(--sys);color:#111;container-type:inline-size}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:30%;height:22px;background:#000;border-radius:14px;z-index:9}
+.view{position:absolute;inset:0;display:flex;flex-direction:column}
+.view.enter{animation:enter .45s cubic-bezier(.2,.7,.2,1)}
+.sb{height:40px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 22px 0 26px;font-size:12px;font-weight:600}
+.sb .ic2{display:flex;gap:4px;align-items:center}
+.bars{display:flex;gap:1.5px;align-items:flex-end;height:9px}
+.bars i{width:2.5px;background:currentColor;border-radius:1px}
+.batt{width:19px;height:9px;border:1.3px solid currentColor;border-radius:3px;position:relative;opacity:.9}
+.batt::after{content:"";position:absolute;inset:1.2px;right:5px;background:currentColor;border-radius:1px}
+
+/* mail */
+.mail{background:#fff}
+.mail .sb{color:#111}
+.mnav{flex:none;display:flex;justify-content:space-between;align-items:center;padding:2px 14px 6px;color:#2F7BF0;font-size:14px}
+.mscroll{position:absolute;top:66px;left:0;right:0;bottom:0;overflow-y:auto;scrollbar-width:none;padding:0 14px 24px}
+.mscroll::-webkit-scrollbar{display:none}
+.mhead{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;padding:6px 0 8px;border-bottom:1px solid #eceef1}
+.av{width:30px;height:30px;border-radius:50%;background:#C8CDD4;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.mfrom{font-size:12.5px;font-weight:600;line-height:1.2;word-break:break-all}
+.mto{font-size:11px;color:#77808b}
+.mtime{font-size:11px;color:#77808b}
+.msubj{font-size:15px;font-weight:700;margin:9px 0 2px;line-height:1.25}
+.mb{font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:12.3px;line-height:1.42;color:#111}
+.mb .h2{font-size:15.5px;font-weight:700;margin:10px 0 8px;line-height:1.25}
+.mb p{margin:0 0 9px}
+.mb h3{font-size:13.5px;margin:13px 0 5px}
+.mb ul{margin:0 0 8px;padding-left:17px}
+.mb li{margin-bottom:5px}
+.mb small{font-size:11px;color:#666}
+.mb .fb{color:#888;font-size:10.5px;white-space:nowrap}
+.mb .warn{color:#a33}
+.mb .hint{color:#666}
+.mb .cov,.mb .ftr{color:#888;font-size:10.5px;margin-bottom:5px}
+.mb a{color:#1a5fd0}
+.mb .hl{background:#FDEBD2;border-radius:4px;box-shadow:0 0 0 3px #FDEBD2}
+.att{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;border:1px solid #e3e6ea;border-radius:12px;padding:8px 10px;margin:12px 0 6px;background:#f8f9fb}
+.att.hl{animation:ring 1.2s ease-in-out infinite}
+.att .cal{width:34px;height:38px;border-radius:7px;background:#fff;border:1px solid #e0e3e8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;color:#E5483B;font-weight:700;line-height:1}
+.att .cal b{font-size:16px;color:#111;margin-top:2px}
+.att .fn{font-size:11.5px;font-weight:600;word-break:break-all;line-height:1.25}
+.att .fs{font-size:10.5px;color:#77808b}
+
+:root{--pw:min(300px,78vw)}
+body{font-family:var(--body),'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.page{max-width:1080px;margin:0 auto;padding:20px 20px 44px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap;margin-bottom:34px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.segs{display:inline-flex;background:var(--chip);border-radius:999px;padding:3px}
+.seg{border:0;background:none;border-radius:999px;padding:6px 16px;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink-2);min-height:36px}
+.seg[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
+.seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:44px;align-items:center}
+.hero h1{font-family:var(--display),'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,50px);line-height:1.08;letter-spacing:-.02em;margin:8px 0 14px;text-wrap:balance}
+.lede{font-size:17px;color:var(--ink-2);max-width:56ch;margin:0 0 24px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.badge{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 13px;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none}
+.badge::before{content:"✓";color:var(--good);font-weight:700}
+a.badge:hover{border-color:var(--ink-2)}
+a.badge:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:56ch}
+.flow li{display:grid;grid-template-columns:100px minmax(0,1fr);gap:14px;align-items:baseline;padding-top:12px;border-top:1px solid var(--line)}
+.flow b{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.cap{font-size:13px;color:var(--muted);text-align:center;max-width:300px}
+.cards{margin-top:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
+.card h2{font-family:var(--display),'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:18px;margin:6px 0 8px;letter-spacing:-.01em}
+.card ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+.card li{margin-bottom:6px}
+.card p{margin:0;color:var(--ink-2);font-size:14.5px}
+.lang{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
+.more{font-size:13px;color:var(--muted)}
+.cta{margin-top:16px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px 36px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 24px}
+.cta h2{font-family:var(--display),'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:24px;margin:6px 0 12px;letter-spacing:-.015em}
+.steps{margin:0;padding-left:22px;color:var(--ink-2);font-size:15px;display:grid;gap:8px}
+.steps li::marker{font-family:var(--mono);color:var(--accent);font-weight:500}
+.links{display:grid;gap:12px}
+.cta-btn{display:grid;gap:3px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px 16px;background:var(--panel-2);min-height:44px}
+.cta-btn b{font-size:16px}
+.cta-btn span{font-size:13.5px;color:var(--ink-2)}
+.cta-btn.primary{background:var(--chip-on);border-color:var(--chip-on);color:var(--chip-on-ink)}
+.cta-btn.primary span{color:var(--chip-on-ink);opacity:.82}
+.cta-btn:hover{border-color:var(--ink-2)}
+.cta-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.fine{margin:28px 0 0;font-size:12.5px;color:var(--muted)}
+.foot{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px}
+.foot a{color:var(--ink-2)}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr);gap:30px}.cards,.cta{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.page{padding:16px 16px 36px}.flow li{grid-template-columns:minmax(0,1fr);gap:2px}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@keyframes ring{0%,100%{box-shadow:0 0 0 0 rgba(239,162,74,0),0 0 0 2px #EFA24A}50%{box-shadow:0 0 0 6px rgba(239,162,74,.25),0 0 0 2px #EFA24A}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="brand"><i aria-hidden="true"></i>Parent Recap</div>
+    <div class="lang">
+      <span class="more" id="t-more"></span>
+      <div class="segs" role="group" aria-label="Language">
+        <button class="seg" data-l="fi" type="button">Suomi</button>
+        <button class="seg" data-l="en" type="button">English</button>
+        <button class="seg" data-l="zh" type="button">中文</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="mono" id="t-when"></div>
+        <h1 id="t-h1"></h1>
+        <p class="lede" id="t-lede"></p>
+        <div class="badges" id="t-badges"></div>
+        <ol class="flow" id="t-flow"></ol>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen" id="scr"><div class="island"></div></div></div>
+        <div class="cap" id="t-cap"></div>
+      </div>
+    </section>
+    <section class="cards" id="t-cards"></section>
+    <section class="cta" id="t-cta" aria-live="polite"></section>
+  </main>
+  <footer>
+    <p class="fine" id="t-fine"></p>
+    <nav class="foot" id="t-links"></nav>
+  </footer>
+</div>
+
+<script>
+(() => {
+const OPT = {ai:'claude', lang2:'fi', cal:'ics', sc:'normal'};
+const AI = {claude:'Claude', codex:'Codex'};
+const SRC = {gmail:'Gmail', wilma:'Wilma', whatsapp:'WhatsApp', myclub:'MyClub'};
+const LANG = {
+  zh:{label:'中文', lock:{tue:'9月29日 星期二', wed:'9月30日 星期三'}, sep:':',
+    h2:{tue:'9月29日 周二', wed:'9月30日 周三'},
+    days:{wed:'9月30日 周三', thu:'10月1日 周四', sat:'10月3日 周六'},
+    wk:['一','二','三','四','五','六','日'], month:'9月', calTitle:'日历',
+    actions:'✅ 待办', events:'📅 新日历事件', icsHint:'已打包在邮件附件的 .ics 里，点开附件即可一键加入你的日历。',
+    read:'📥 今晚读取：', due:d => 'by ' + d, who:{mom:'妈妈', dad:'爸爸', either:'任一'}, re:'（再提醒）',
+    written:a => '由 ' + a + ' 生成', fbDigest:'❌ 摘要里有错', fbSaved:'⭐ 幸好有这条', fbWrong:'❌ 这条错了',
+    n:{gmail:n => 'Gmail ' + n + ' 条', myclub:n => 'MyClub ' + n + ' 个日程', wilma:n => 'Wilma ' + n + ' 条', whatsapp:n => 'WhatsApp ' + n + ' 条'},
+    waNote:a => '⚠️ WhatsApp 没读到（macOS 权限被拒绝），今天的日报可能缺这一块。<br>• WhatsApp：macOS 权限被拒绝。跟 ' + a + ' 说「Parent Recap 读不了 WhatsApp」即可修复。',
+    ui:{inbox:'收件箱', to:'收件人：', addAll:'全部添加', nev:n => n + ' 个日程', more:n => '今天还有 ' + n + ' 条通知', today:'今天'}},
+  en:{label:'English', lock:{tue:'Tuesday 29 September', wed:'Wednesday 30 September'}, sep:':',
+    h2:{tue:'Tue 29 Sep', wed:'Wed 30 Sep'},
+    days:{wed:'Wed 30 Sep', thu:'Thu 1 Oct', sat:'Sat 3 Oct'},
+    wk:['M','T','W','T','F','S','S'], month:'September', calTitle:'Calendar',
+    actions:'✅ Action Items', events:'📅 New calendar events', icsHint:'They are in the attached .ics. Open it to add them to your calendar.',
+    read:'📥 Read tonight: ', due:d => 'by ' + d, who:{mom:'Mom', dad:'Dad', either:'Either'}, re:'(Reminder) ',
+    written:a => 'Written by ' + a, fbDigest:'❌ The Digest has a mistake', fbSaved:'⭐ Glad this was here', fbWrong:'❌ This is wrong',
+    n:{gmail:n => 'Gmail ' + n + (n === 1 ? ' message' : ' messages'), myclub:n => 'MyClub ' + n + (n === 1 ? ' event' : ' events'), wilma:n => 'Wilma ' + n + (n === 1 ? ' message' : ' messages'), whatsapp:n => 'WhatsApp ' + n + (n === 1 ? ' message' : ' messages')},
+    waNote:a => '⚠️ WhatsApp not read (macOS permission denied). Tonight’s Brief may be incomplete.<br>• WhatsApp: macOS permission denied. Tell ' + a + ' “Parent Recap can’t read WhatsApp” to fix it.',
+    ui:{inbox:'Inbox', to:'To: ', addAll:'Add All', nev:n => n + (n === 1 ? ' event' : ' events'), more:n => n + ' more notifications from today', today:'Today'}},
+  fi:{label:'Suomi', lock:{tue:'tiistai 29. syyskuuta', wed:'keskiviikko 30. syyskuuta'}, sep:'.',
+    h2:{tue:'ti 29.9.', wed:'ke 30.9.'},
+    days:{wed:'ke 30.9.', thu:'to 1.10.', sat:'la 3.10.'},
+    wk:['ma','ti','ke','to','pe','la','su'], month:'Syyskuu', calTitle:'Kalenteri',
+    actions:'✅ Hoidettavat', events:'📅 Uudet kalenteritapahtumat', icsHint:'Ne ovat liitteenä olevassa .ics-tiedostossa. Avaa se, niin saat ne kalenteriisi.',
+    read:'📥 Luettu tänä iltana: ', due:d => 'viimeistään ' + d, who:{mom:'Äiti', dad:'Isä', either:'Kumpi tahansa'}, re:'(Muistutus) ',
+    written:a => 'Kirjoittanut: ' + a, fbDigest:'❌ Yhteenvedossa on virhe', fbSaved:'⭐ Hyvä, että tämä oli mukana', fbWrong:'❌ Tämä on väärin',
+    n:{gmail:n => 'Gmail ' + n + (n === 1 ? ' viesti' : ' viestiä'), myclub:n => 'MyClub ' + n + (n === 1 ? ' tapahtuma' : ' tapahtumaa'), wilma:n => 'Wilma ' + n + (n === 1 ? ' viesti' : ' viestiä'), whatsapp:n => 'WhatsApp ' + n + (n === 1 ? ' viesti' : ' viestiä')},
+    waNote:a => '⚠️ WhatsApp jäi lukematta (macOS ei antanut käyttöoikeutta). Tämäniltaisesta koosteesta voi puuttua jotain.<br>• WhatsApp: macOS ei antanut käyttöoikeutta. Voit korjata tämän kirjoittamalla ' + a + '-avustajalle ”Parent Recap ei pysty lukemaan lähdettä WhatsApp”.',
+    ui:{inbox:'Saapuneet', to:'Vastaanottaja: ', addAll:'Lisää kaikki', nev:n => n + (n === 1 ? ' tapahtuma' : ' tapahtumaa'), more:n => n + ' muuta ilmoitusta tänään', today:'Tänään'}}
+};
+
+/* what the Brief says; sus = only on the odd-message night, catch = only after WhatsApp failed */
+const DIG = {
+  tue:[
+    {kid:'Aino', src:'wilma', zh:'周四去 Nuuksio 远足（retki）9–14 点，带午饭和雨具，周三前在 Wilma 签同意书', en:'Thursday retki to Nuuksio 9–14: pack lunch and rain gear, sign the permission in Wilma by Wednesday', fi:'Torstaina retki Nuuksioon klo 9–14: eväät ja sadevarusteet mukaan, lupa kuitataan Wilmassa keskiviikkoon mennessä'},
+    {kid:'Aino', src:'gmail', zh:'周三上午拍班级照', en:'Class photos Wednesday morning', fi:'Luokkakuvaus keskiviikkona aamupäivällä'},
+    {kid:'Aino', src:'whatsapp', zh:'周六对 PK-35 的比赛改到 11:00，10:30 在 Leppävaara 球场集合', en:'Saturday’s match against PK-35 moves to 11:00, meet 10:30 at the Leppävaara pitch', fi:'Lauantain peli PK-35:tä vastaan siirtyy klo 11:een, kokoontuminen klo 10.30 Leppävaaran kentällä'},
+    {kid:'Aino', src:'myclub', zh:'周三 17:00 照常训练，和 Eero 的钢琴课在同一晚', en:'Training Wednesday 17:00 as usual, the same evening as Eero’s piano', fi:'Treenit keskiviikkona klo 17 tavalliseen tapaan, samana iltana kuin Eeron pianotunti'},
+    {kid:'Aino', src:'whatsapp', sus:true, zh:'3B vanhemmat 群里有一条消息想给 AI 助手下指令，没有照做', en:'A message in 3B vanhemmat gave instructions to the assistant. They were not followed', fi:'3B vanhemmat -ryhmän viestissä annettiin ohjeita avustajalle. Niitä ei noudatettu'},
+    {kid:'Eero', src:'gmail', zh:'周三上午拍班级照', en:'Class photos Wednesday morning', fi:'Luokkakuvaus keskiviikkona aamupäivällä'},
+    {kid:'Eero', src:'gmail', zh:'本周钢琴课改到周三 17:30', en:'Piano moves to Wednesday 17:30 this week', fi:'Pianotunti siirtyy tällä viikolla keskiviikkoon klo 17.30'}
+  ],
+  wed:[
+    {kid:'Aino', src:'wilma', zh:'明天远足 9–14 点，记得带午饭和雨具', en:'Retki tomorrow 9–14, remember lunch and rain gear', fi:'Retki huomenna klo 9–14, muista eväät ja sadevarusteet'},
+    {kid:'Aino', src:'whatsapp', catch:true, zh:'周六对 PK-35 的比赛改到 11:00，10:30 在 Leppävaara 球场集合', en:'Saturday’s match against PK-35 moves to 11:00, meet 10:30 at the Leppävaara pitch', fi:'Lauantain peli PK-35:tä vastaan siirtyy klo 11:een, kokoontuminen klo 10.30 Leppävaaran kentällä'}
+  ]
+};
+const A_PULLA = {kid:'Aino', src:'whatsapp', who:'mom', due:'thu', zh:'在 3B vanhemmat 群里回复能否带 pulla 去 syysjuhla', en:'Reply in 3B vanhemmat if you can bring pulla to the syysjuhla', fi:'Vastaa 3B vanhemmat -ryhmään, jos voit tuoda pullaa syysjuhlaan'};
+const A_PACK = {kid:'Aino', src:'wilma', who:'either', due:'thu', zh:'准备远足的午饭和雨具', en:'Pack lunch and rain gear for the retki', fi:'Pakkaa retkelle eväät ja sadevarusteet'};
+const ACT = {
+  tue:[
+    {kid:'Aino', src:'wilma', who:'either', due:'wed', zh:'在 Wilma 签远足同意书', en:'Sign the retki permission in Wilma', fi:'Kuittaa retken lupa Wilmassa'},
+    A_PACK, A_PULLA
+  ],
+  wed:[{...A_PULLA, catch:true}, {...A_PACK, rem:true}]
+};
+const E_MATCH = {kid:'Aino', src:'whatsapp', day:'sat', time:'11:00', k:'k3', zh:'对 PK-35 比赛', en:'Match vs PK-35', fi:'Peli PK-35:tä vastaan'};
+const EV = {
+  tue:[
+    {kid:'Eero', src:'gmail', day:'wed', time:'17:30', k:'k2', zh:'钢琴课（改期）', en:'Piano lesson (moved)', fi:'Pianotunti (siirretty)'},
+    {kid:'Aino', src:'wilma', day:'thu', time:'09:00', k:'k1', zh:'3B 远足 Nuuksio', en:'3B retki to Nuuksio', fi:'3B:n retki Nuuksioon'},
+    E_MATCH
+  ],
+  wed:[{...E_MATCH, catch:true}]
+};
+const keep = night => it => !(it.sus && OPT.sc !== 'sus') && !(it.catch && OPT.sc !== 'wa') && !(night === 'tue' && OPT.sc === 'wa' && it.src === 'whatsapp');
+const items = (set, night) => set[night].filter(keep(night));
+const fiTime = t => { const [h, m] = t.split(':'); return 'klo ' + (+h) + '.' + m; };
+const when = (lang, ev) => LANG[lang].days[ev.day] + ' ' + (lang === 'fi' ? fiTime(ev.time) : ev.time);
+function counts(night){
+  if (night === 'wed') return {gmail:1, whatsapp:OPT.sc === 'wa' ? 3 : 1};
+  const c = {gmail:2, myclub:1, wilma:1};
+  if (OPT.sc !== 'wa') c.whatsapp = OPT.sc === 'sus' ? 3 : 2;
+  return c;
+}
+const nMsgs = c => (c.gmail || 0) + (c.wilma || 0) + (c.whatsapp || 0);
+
+function briefHTML(lang, night){
+  const L = LANG[lang], a = AI[OPT.ai], ics = OPT.cal === 'ics';
+  const dig = items(DIG, night), acts = items(ACT, night), evs = items(EV, night);
+  let h = '<div class="h2" data-a="top">👨‍👩‍👧‍👦 Parent Recap · ' + L.h2[night] + '</div>';
+  if (night === 'tue' && OPT.sc === 'wa') h += '<p class="warn">' + L.waNote(a) + '</p>';
+  for (const kid of ['Aino', 'Eero']) {
+    const lines = dig.filter(d => d.kid === kid);
+    if (lines.length) h += '<p><b>' + kid + '</b><br>' + lines.map(d => '- ' + d[lang]).join('<br>') + '</p>';
+  }
+  h += '<p><small class="fb">' + L.fbDigest + '</small></p>';
+  if (acts.length) {
+    h += '<h3 data-a="actions">' + L.actions + '</h3><ul>';
+    for (const x of acts) h += '<li>' + (x.rem ? L.re : '') + x[lang] + '<small> (' + x.kid + ') · ' + L.due(L.days[x.due]) + ' · ' + L.who[x.who] + ' · ' + SRC[x.src] + '</small> <small class="fb">' + L.fbSaved + ' · ' + L.fbWrong + '</small></li>';
+    h += '</ul>';
+  }
+  if (evs.length) {
+    h += '<h3 data-a="events">' + L.events + '</h3>' + (ics ? '<p class="hint">' + L.icsHint + '</p>' : '') + '<ul>';
+    for (const e of evs) h += '<li>' + (ics ? e[lang] : '<a href="#" tabindex="-1">' + e[lang] + '</a>') + ' — ' + when(lang, e) + ' (' + e.kid + ')</li>';
+    h += '</ul>';
+  }
+  const c = counts(night);
+  h += '<p class="cov" data-a="foot">' + L.read + ['gmail', 'myclub', 'wilma', 'whatsapp'].filter(s => c[s]).map(s => L.n[s](c[s])).join(' · ') + '</p>';
+  h += '<p class="ftr">' + L.written(a) + '</p>';
+  if (ics && evs.length) h += '<div class="att" data-a="attach"><div class="cal">' + (night === 'tue' ? 'TUE' : 'WED') + '<b>' + (night === 'tue' ? 29 : 30) + '</b></div><div><div class="fn">parent-recap-2026-09-' + (night === 'tue' ? 29 : 30) + '.ics</div><div class="fs">' + L.ui.nev(evs.length) + '</div></div></div>';
+  return h;
+}
+
+const statusBar = (time) => '<div class="sb"><span>' + (time || '') + '</span><span class="ic2"><span class="bars"><i style="height:3px"></i><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i></span><span class="batt"></span></span></div>';
+function mailView(lang, night, time, recip){
+  const L = LANG[lang];
+  return '<div class="view mail">' + statusBar(time) + '<div class="mnav"><span>‹ ' + L.ui.inbox + '</span><span>⌃ ⌄</span></div>' +
+    '<div class="mscroll"><div class="mhead"><div class="av">M</div><div><div class="mfrom">mei.family@example.com</div><div class="mto">' + L.ui.to + recip + '</div></div><div class="mtime">' + time + '</div></div>' +
+    '<div class="msubj">Parent Recap · ' + L.h2[night] + '</div><div class="mb">' + briefHTML(lang, night) + '</div></div></div>';
+}
+
+const T = {
+  en:{when:'Every evening · 21:00 unless you pick another time',
+    h1:'One short email every evening about your kids’ school and clubs',
+    lede:'Parent Recap reads the school mail, Wilma, WhatsApp parent groups and club calendars on your own Mac. It tells you what to know, what to do and by when.',
+    flow:[['Reads','Gmail, Wilma, WhatsApp groups and MyClub: only the senders and groups you pick.'],['Writes','Your own Claude or ChatGPT turns it into one Brief: what to know, what to do and by when, and the new events.'],['Sends','An email to you and your partner, each in your own language. New events come as a calendar attachment, and one tap adds them.']],
+    badges:['Free to use','Open source on GitHub','Runs on your Mac'],
+    cap:'What lands in your inbox. Scroll it.',
+    cards:[['Privacy','Open source, and on your Mac','The whole program runs on your Mac, with no server of ours in between. Passwords go into the macOS Keychain. Only the text of tonight’s messages goes to your own Claude or ChatGPT, on your own plan. The code is open source (MIT license) on GitHub, so anyone can read what it does with your messages.'],
+           ['What you need','A Mac and a plan you have',['Parent Recap is free to use. The AI plan is yours, so we add no cost on top.','A Mac at home that is on or asleep in the evening','Claude Pro or Max, or ChatGPT Plus or above','A Gmail account with 2-Step Verification on','About 15 to 30 minutes for setup (an estimate)']]],
+    more:'More languages to come',
+    cta:['Get started','Try it on your Mac',['Paste one line into Terminal. It is in the README.','A setup page opens in your browser and walks you through the rest.','Your first Brief arrives during setup. The evening Brief starts that night.'],['Start from GitHub','The README has the one line to paste.'],['What the AI sees','Exactly which text goes to the AI, and what stays on your Mac.']],
+    fine:'The household, names and messages on this page are made up.', links:['Source code','MIT license','Privacy','Questions and problems']},
+  fi:{when:'Joka ilta · klo 21.00, ellet valitse toista aikaa',
+    h1:'Joka ilta yksi lyhyt sähköposti lastesi koulusta ja harrastuksista',
+    lede:'Parent Recap lukee koulun sähköpostit, Wilman, vanhempien WhatsApp-ryhmät ja seurojen kalenterit omalta Maciltasi. Se kertoo, mitä pitää tietää, mitä tehdä ja mihin mennessä.',
+    flow:[['Lukee','Gmail, Wilma, WhatsApp-ryhmät ja MyClub: vain valitsemasi lähettäjät ja ryhmät.'],['Kirjoittaa','Oma Claudesi tai ChatGPT:si tekee niistä yhden yhteenvedon: mitä pitää tietää, mitä tehdä ja mihin mennessä, sekä uudet tapahtumat.'],['Lähettää','Sähköposti sinulle ja kumppanillesi, kummallekin omalla kielellään. Uudet tapahtumat tulevat kalenteriliitteenä, ja yksi napautus lisää ne kalenteriin.']],
+    badges:['Maksuton','Avoin lähdekoodi GitHubissa','Toimii omalla Macillasi'],
+    cap:'Näin se saapuu sähköpostiisi. Voit vierittää.',
+    cards:[['Yksityisyys','Avoin lähdekoodi, ja pysyy Macillasi','Koko ohjelma toimii omalla Macillasi, eikä välissä ole meidän palvelintamme. Salasanat tallennetaan macOS:n avainnippuun. Vain kunkin illan viestien teksti menee omalle Claudellesi tai ChatGPT:llesi, omalla tilauksellasi. Koodi on avointa lähdekoodia (MIT-lisenssi) GitHubissa, joten kuka tahansa voi lukea, mitä se tekee viesteillesi.'],
+           ['Mitä tarvitset','Mac ja tilaus, jonka sinulla jo on',['Parent Recap on maksuton. Tekoälytilaus on omasi, joten emme lisää kuluja päälle.','Mac kotona, joka on illalla päällä tai lepotilassa','Claude Pro tai Max, tai ChatGPT Plus tai korkeampi','Gmail-tili, jossa kaksivaiheinen vahvistus on käytössä','Käyttöönottoon menee noin 15–30 minuuttia (arvio)']]],
+    more:'Lisää kieliä tulossa',
+    cta:['Aloita','Kokeile omalla Macillasi',['Liitä yksi rivi Päätteeseen (Terminal). Rivi löytyy README-tiedostosta.','Asetussivu aukeaa selaimeen ja opastaa lopun.','Ensimmäinen yhteenveto tulee jo asennuksen aikana. Iltayhteenveto alkaa samana iltana.'],['Aloita GitHubista','README:ssä on yksi rivi, jonka liität.'],['Mitä tekoäly näkee','Mikä teksti menee tekoälylle ja mikä jää Macillesi.']],
+    fine:'Perhe, nimet ja viestit tällä sivulla ovat keksittyjä.', links:['Lähdekoodi','MIT-lisenssi','Yksityisyys','Kysymykset ja ongelmat']},
+  zh:{when:'每天晚上 · 默认 21:00，时间可以自己选',
+    h1:'每天晚上一封简短的邮件，告诉你孩子学校和兴趣班的事',
+    lede:'Parent Recap 在你自己的 Mac 上读学校邮件、Wilma、WhatsApp 家长群和俱乐部日历，整理出哪些要知道、哪些要做、什么时候之前做。',
+    flow:[['读取','Gmail、Wilma、WhatsApp 群和 MyClub，只读你选的发件人和群。'],['撰写','你自己的 Claude 或 ChatGPT 把它整理成一份日报：要知道的、要做的和截止日期，以及新的日程。'],['发送','发到你和伴侣的邮箱，各用自己的语言。新日程以日历附件带上，点一下就能加进日历。']],
+    badges:['免费使用','GitHub 上开源','在你自己的 Mac 上运行'],
+    cap:'日报到你邮箱里的样子，可以上下滑动。',
+    cards:[['隐私','代码开源，数据留在你的 Mac 上','整个程序都跑在你自己的 Mac 上，中间没有我们的服务器。密码放进 macOS 的钥匙串。只有当晚消息的文字会发给你自己的 Claude 或 ChatGPT，用的是你自己的订阅。代码在 GitHub 上开源（MIT 协议），谁都可以看它到底怎么处理你的消息。'],
+           ['需要什么','一台 Mac 和你已有的订阅',['Parent Recap 本身免费。AI 订阅是你自己的，我们不额外收费。','家里一台晚上开着或睡眠中的 Mac','Claude Pro 或 Max，或 ChatGPT Plus 及以上','一个开了两步验证的 Gmail','设置大约 15 到 30 分钟（估计）']]],
+    more:'更多语言陆续支持',
+    cta:['开始','在你自己的 Mac 上试试',['把一行命令粘贴到「终端」里，命令在 README 里。','浏览器里会打开一个设置页面，一步步带你做完。','设置过程中就会收到第一份日报，当晚开始每晚发。'],['从 GitHub 开始','README 里有要粘贴的那一行命令。'],['AI 看到什么','哪些文字会发给 AI，哪些留在你的 Mac 上。']],
+    fine:'页面里的家庭、名字和消息都是编的。', links:['源代码','MIT 协议','隐私','问题与反馈']}
+};
+const REPO = 'https://github.com/kinlace/parent-recap';
+const GH_URL = REPO + '#install';
+const AI_URL = REPO + '#what-the-ai-sees';
+let lang = 'en';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const scr = document.getElementById('scr');
+let stopAt = 0, scrollTimer = null;
+function auto(){
+  clearInterval(scrollTimer);
+  if (reduced) return;
+  stopAt = 0;
+  scrollTimer = setInterval(() => {
+    const sc = scr.querySelector('.mscroll'); if (!sc) return;
+    stopAt = (stopAt + 1) % 3;
+    const el = sc.querySelector('[data-a="' + ['top', 'actions', 'events'][stopAt] + '"]');
+    sc.scrollTo({top: stopAt === 0 || !el ? 0 : Math.max(0, el.offsetTop - 10), behavior:'smooth'});
+  }, 3400);
+}
+['wheel', 'touchstart', 'pointerdown'].forEach(ev => scr.addEventListener(ev, () => clearInterval(scrollTimer), {passive:true}));
+function render(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.getElementById('t-when').textContent = t.when;
+  document.getElementById('t-h1').textContent = t.h1;
+  document.getElementById('t-lede').textContent = t.lede;
+  document.getElementById('t-badges').innerHTML = t.badges.map((x, i) => i === 1 ? '<a class="badge" href="' + REPO + '">' + x + '</a>' : '<span class="badge">' + x + '</span>').join('');
+  document.getElementById('t-flow').innerHTML = t.flow.map(([k, v]) => '<li><b>' + k + '</b><span>' + v + '</span></li>').join('');
+  document.getElementById('t-cap').textContent = t.cap;
+  document.getElementById('t-cards').innerHTML = t.cards.map(([k, h, body]) => '<div class="card"><div class="mono">' + k + '</div><h2>' + h + '</h2>' +
+    (Array.isArray(body) ? '<ul>' + body.map(x => '<li>' + x + '</li>').join('') + '</ul>' : '<p>' + body + '</p>') + '</div>').join('');
+  document.getElementById('t-more').textContent = t.more;
+  const [ck, ch, steps, gh, ai] = t.cta;
+  document.getElementById('t-cta').innerHTML = '<div><div class="mono">' + ck + '</div><h2>' + ch + '</h2><ol class="steps">' + steps.map(x => '<li>' + x + '</li>').join('') + '</ol></div>' +
+    '<div class="links"><a class="cta-btn primary" href="' + GH_URL + '"><b>' + gh[0] + ' →</b><span>' + gh[1] + '</span></a>' +
+    '<a class="cta-btn" href="' + AI_URL + '"><b>' + ai[0] + ' →</b><span>' + ai[1] + '</span></a></div>';
+  const LINKS = [REPO, REPO + '/blob/main/LICENSE', REPO + '#privacy', REPO + '/issues'];
+  document.getElementById('t-fine').textContent = t.fine;
+  document.getElementById('t-links').innerHTML = t.links.map((x, i) => '<a href="' + LINKS[i] + '">' + x + '</a>').join('');
+  document.querySelectorAll('.seg').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === lang)));
+  scr.innerHTML = '<div class="island"></div>' + mailView(lang, 'tue', '21:03', 'Mei');
+  auto();
+}
+function setLang(l, remember){
+  lang = l;
+  if (remember) {
+    try { localStorage.setItem('pr-lang', l); } catch (e) {}
+    try { const u = new URL(location.href); u.searchParams.set('lang', l); u.hash = ''; history.replaceState(null, '', u); } catch (e) {}
+  }
+  render();
+}
+document.querySelectorAll('.seg').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l, true)));
+(function start(){
+  let l = '';
+  try { const q = new URLSearchParams(location.search).get('lang'); if (Object.hasOwn(T, q)) l = q; } catch (e) {}
+  if (!l) { try { const s = localStorage.getItem('pr-lang'); if (Object.hasOwn(T, s)) l = s; } catch (e) {} }
+  if (!l) { const n = (navigator.language || 'en').slice(0, 2); l = Object.hasOwn(T, n) ? n : 'en'; }
+  setLang(l, false);
+})();
+})();
+</script>
+
+</html>
