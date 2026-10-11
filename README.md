@@ -8,7 +8,7 @@ Facts about installing, privacy and what the AI sees belong to the [parent-recap
 
 ## DNS
 
-`parentrecap.com` is registered at Porkbun. The records for this site, set through Porkbun's API (`/dns/create/parentrecap.com`, `/dns/editByNameType/...`):
+`parentrecap.com` is registered at Porkbun. `dns.py` sets the records below through Porkbun's API, with the key in `PORKBUN_API_KEY` and `PORKBUN_SECRET_API_KEY` (API access must be on for the domain in Porkbun). It only prints the plan until run with `--apply`; `--challenge <value>` also adds GitHub's `_github-pages-challenge-kinlace` TXT record.
 
 | Name | Type | Value |
 | --- | --- | --- |
