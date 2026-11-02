@@ -764,8 +764,9 @@
         margin-top: 48px;
       }
       .demo h2 {
-        font-family: var(--display), "PingFang SC", "Hiragino Sans GB",
-          "Microsoft YaHei", sans-serif;
+        font-family:
+          var(--display), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          sans-serif;
         font-size: 22px;
         margin: 0 0 14px;
         letter-spacing: -0.015em;
@@ -1389,7 +1390,7 @@
                 "Asetussivu aukeaa ja opastaa.",
                 "Ensimmäinen kooste tulee jo käyttöönoton aikana.",
               ],
-              ["Aloita GitHubista", "README:ssä on lisätiedot (englanniksi)."],
+              ["Aloita GitHubista", "README:ssä on lisätiedot."],
             ],
             fine: "Perheet, nimet ja viestit tällä sivulla ja videolla ovat keksittyjä.",
             links: [
@@ -1442,14 +1443,19 @@
                 "浏览器会自动打开设置页面，跟着提示操作就行。",
                 "设置过程中就能收到第一份日报。",
               ],
-              ["在 GitHub 上查看", "README 里有更多说明（英文）。"],
+              ["在 GitHub 上查看", "README 里有更多说明。"],
             ],
             fine: "页面和视频里的家庭、名字和消息均为虚构。",
             links: ["源代码", "MIT 协议", "隐私", "问题与反馈"],
           },
         };
         const REPO = "https://github.com/kinlace/parent-recap";
-        const GH_URL = REPO + "#install";
+        // Each language's README, with its Install and Privacy headings' anchors.
+        const README = {
+          en: [REPO, "install", "privacy"],
+          fi: [REPO + "/blob/main/README.fi.md", "asennus", "yksityisyys"],
+          zh: [REPO + "/blob/main/README.zh-CN.md", "安装", "隐私"],
+        };
         // The same lines as Install in the README and docs/windows.md.
         const LINE = {
           mac: 'bash -c "$(curl -fsSL https://raw.githubusercontent.com/kinlace/parent-recap/stable/get.sh)"',
@@ -1597,7 +1603,9 @@
             st.btn[1] +
             "</span></button>" +
             '<a class="cta-btn" href="' +
-            GH_URL +
+            README[lang][0] +
+            "#" +
+            README[lang][1] +
             '"><b>' +
             gh[0] +
             " →</b><span>" +
@@ -1634,7 +1642,7 @@
           const LINKS = [
             REPO,
             REPO + "/blob/main/LICENSE",
-            REPO + "#privacy",
+            README[lang][0] + "#" + README[lang][2],
             REPO + "/issues",
           ];
           document.getElementById("t-links").innerHTML = t.links
