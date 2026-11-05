@@ -4,7 +4,7 @@ The homepage of [Kinlace Parent Recap](https://github.com/kinlace/parent-recap):
 
 Pushing to `main` deploys it to GitHub Pages (`.github/workflows/pages.yml`). Preview locally with `python3 -m http.server` and open `http://localhost:8000/?lang=fi` (`fi`, `en` or `zh`).
 
-The page says what Parent Recap does in a few lines; the details of installing, privacy and what the AI sees belong to the [parent-recap README](https://github.com/kinlace/parent-recap#readme), which the page links to in its own language (`README.fi.md` and `README.zh-CN.md` for Finnish and Chinese). The install lines on the page are the same as the README's Install: change both together.
+The page says what Parent Recap does in a few lines, and that the maintainers can run it for a few invited families who have no computer; the details of installing, privacy and what the AI sees belong to the [parent-recap README](https://github.com/kinlace/parent-recap#readme), which the page links to in its own language (`README.fi.md` and `README.zh-CN.md` for Finnish and Chinese). The install lines on the page are the same as the README's Install: change both together.
 
 ## DNS
 

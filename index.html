@@ -9,7 +9,7 @@
     <title>Parent Recap</title>
     <meta
       name="description"
-      content="One short email every evening about your kids' school and clubs, from school mail, Wilma, WhatsApp parent groups and MyClub, written on your own Mac or Windows PC."
+      content="One short email every evening about your kids' school and clubs, from school mail, Wilma, WhatsApp parent groups, MyClub and Eepos, written on your own Mac or Windows PC, or run for you if you have no computer."
     />
     <link
       rel="icon"
@@ -558,6 +558,9 @@
         border-radius: 16px;
         box-shadow: var(--shadow);
         padding: 16px 18px;
+      }
+      .card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
       }
       .card h2 {
         font-family:
@@ -1297,7 +1300,7 @@
           en: {
             when: "Every evening · 21:00 unless you pick another time",
             h1: "One short email every evening about your kids’ school and clubs",
-            lede: "Parent Recap reads school mail, Wilma, WhatsApp parent groups and club calendars, and emails you and your partner what to know, what to do and by when, each in your own language.",
+            lede: "Parent Recap reads school mail, Wilma, WhatsApp parent groups, club calendars and music and art school lessons and concerts (Eepos), and emails you and your partner what to know, what to do and by when, each in your own language.",
             badges: [
               "Free to use",
               "Open source on GitHub",
@@ -1311,7 +1314,7 @@
                 "Privacy",
                 "Your family’s data stays with you",
                 [
-                  "Runs on your own computer. We keep no copy of your messages.",
+                  "The computer version runs on your own computer. We keep no copy of your messages.",
                   "Passwords stay in your computer’s own password store.",
                   "Before the AI sees anything, other people’s names, numbers and links are swapped out, and sensitive messages are held back.",
                   "Open source, so anyone can check.",
@@ -1325,6 +1328,18 @@
                   "Claude Pro or Max, or ChatGPT on any plan, Free included",
                   "Gmail (optional): only to read emails from the school and clubs",
                   "About 10 minutes to set up",
+                ],
+              ],
+              [
+                "No computer?",
+                "We can run it for you",
+                [
+                  "We run Parent Recap for a few invited families. Nothing to install.",
+                  "Sign up with one form on your phone, in about 5 minutes.",
+                  "Reads Wilma, MyClub and Eepos (music and art schools). Not WhatsApp, and not Gmail for now.",
+                  "You don’t need ChatGPT or Claude of your own.",
+                  "Your Wilma password is kept on our server, only to read Wilma.",
+                  "Free for now. To get an invite link, ask the person who sent you this page.",
                 ],
               ],
             ],
@@ -1350,7 +1365,7 @@
           fi: {
             when: "Joka ilta · klo 21.00, ellet valitse toista aikaa",
             h1: "Joka ilta yksi lyhyt sähköposti lastesi koulusta ja harrastuksista",
-            lede: "Parent Recap lukee koulun sähköpostit, Wilman, vanhempien WhatsApp-ryhmät ja seurojen kalenterit ja lähettää sinulle ja kumppanillesi, kummallekin omalla kielellään, mitä pitää tietää, mitä tehdä ja mihin mennessä.",
+            lede: "Parent Recap lukee koulun sähköpostit, Wilman, vanhempien WhatsApp-ryhmät, seurojen kalenterit sekä musiikki- ja taidekoulujen tunnit ja konsertit (Eepos) ja lähettää sinulle ja kumppanillesi, kummallekin omalla kielellään, mitä pitää tietää, mitä tehdä ja mihin mennessä.",
             badges: [
               "Maksuton",
               "Avoin lähdekoodi GitHubissa",
@@ -1364,7 +1379,7 @@
                 "Yksityisyys",
                 "Perheesi tiedot pysyvät sinulla",
                 [
-                  "Toimii omalla koneellasi. Emme säilytä viestejäsi.",
+                  "Tietokoneversio toimii omalla koneellasi. Emme säilytä viestejäsi.",
                   "Salasanat pysyvät koneesi omassa salasanasäilössä.",
                   "Ennen kuin tekoäly näkee mitään, muiden ihmisten nimet, numerot ja linkit vaihdetaan pois ja arkaluonteiset viestit jätetään pois.",
                   "Avoin lähdekoodi, joten kuka tahansa voi tarkistaa.",
@@ -1378,6 +1393,18 @@
                   "Claude Pro tai Max, tai mikä tahansa ChatGPT-tilaus, ilmainenkin",
                   "Gmail (valinnainen): vain koulun ja harrastusten sähköpostien lukemiseen",
                   "Käyttöönottoon noin 10 minuuttia",
+                ],
+              ],
+              [
+                "Ei tietokonetta?",
+                "Voimme hoitaa sen puolestasi",
+                [
+                  "Ylläpidämme Parent Recapia muutamalle kutsutulle perheelle. Mitään ei tarvitse asentaa.",
+                  "Rekisteröidy yhdellä lomakkeella puhelimella, noin 5 minuutissa.",
+                  "Lukee Wilmaa, MyClubia ja Eeposta (musiikki- ja taidekoulut). Ei WhatsAppia eikä toistaiseksi Gmailia.",
+                  "Et tarvitse omaa ChatGPT:tä tai Claudea.",
+                  "Wilma-salasanasi säilytetään palvelimellamme vain Wilman lukemista varten.",
+                  "Toistaiseksi maksuton. Pyydä kutsulinkkiä siltä, joka lähetti sinulle tämän sivun.",
                 ],
               ],
             ],
@@ -1403,7 +1430,7 @@
           zh: {
             when: "每天晚上 · 默认 21:00，时间可以自己选",
             h1: "每天晚上一封简短的邮件，告诉你孩子学校和兴趣班的事",
-            lede: "Parent Recap 读学校邮件、Wilma、WhatsApp 家长群和俱乐部日历，把要知道什么、要做什么、什么时候之前做，发到你和伴侣的邮箱，各用自己的语言。",
+            lede: "Parent Recap 读学校邮件、Wilma、WhatsApp 家长群、俱乐部日历和音乐艺术学校的课程与演出（Eepos），把要知道什么、要做什么、什么时候之前做，发到你和伴侣的邮箱，各用自己的语言。",
             badges: [
               "免费使用",
               "GitHub 上开源",
@@ -1417,7 +1444,7 @@
                 "隐私",
                 "家里的信息留在你自己手里",
                 [
-                  "程序在你自己的电脑上运行，我们不保存你的消息。",
+                  "电脑版在你自己的电脑上运行，我们不保存你的消息。",
                   "密码存在电脑自带的密码库里。",
                   "交给 AI 之前，别人的名字、电话和链接都会被换掉，敏感消息不交给 AI。",
                   "代码开源，谁都可以检查。",
@@ -1431,6 +1458,18 @@
                   "Claude Pro 或 Max，或者任何 ChatGPT 账号，免费版也行",
                   "Gmail（可选）：只在要读学校和兴趣班邮件时才需要",
                   "设置大约 10 分钟",
+                ],
+              ],
+              [
+                "没有电脑？",
+                "我们帮你运行",
+                [
+                  "我们为少数受邀家庭代为运行 Parent Recap，什么都不用安装。",
+                  "在手机上填一张表就能开通，大约 5 分钟。",
+                  "读 Wilma、MyClub 和 Eepos（音乐和艺术学校）。不读 WhatsApp，暂时也不读 Gmail。",
+                  "不需要自己的 ChatGPT 或 Claude。",
+                  "Wilma 密码保存在我们的服务器上，只用来读取 Wilma。",
+                  "目前免费。想要邀请链接，请找把这个页面发给你的人。",
                 ],
               ],
             ],
