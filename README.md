@@ -1,6 +1,6 @@
 # parentrecap.com
 
-The homepage of [Kinlace Parent Recap](https://github.com/kinlace/parent-recap): one static `index.html` and the 1-minute demo video in `media/` (English and Chinese, with their posters), no build step, no third-party requests. `walkthrough/` only redirects old links to the video.
+The homepage of [Parent Recap](https://github.com/kinlace/parent-recap) (by Kinlace): one static `index.html` and the 1-minute demo video in `media/` (English and Chinese, with their posters), no build step, no third-party requests. `walkthrough/` only redirects old links to the video.
 
 Pushing to `main` deploys it to GitHub Pages (`.github/workflows/pages.yml`). Preview locally with `python3 -m http.server` and open `http://localhost:8000/?lang=fi` (`fi`, `en` or `zh`).
 
