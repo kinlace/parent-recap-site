@@ -9,7 +9,7 @@
     <title>Parent Recap</title>
     <meta
       name="description"
-      content="One short email every evening about your kids' school and clubs, from school mail, Wilma, WhatsApp parent groups, MyClub and Eepos, written on your own Mac or Windows PC, or run for you if you have no computer."
+      content="One short email every evening about your kids' school and clubs, from school mail, Wilma, eVaka, WhatsApp parent groups, MyClub and Eepos, written on your own Mac or Windows PC, or run for you if you have no computer."
     />
     <link
       rel="icon"
@@ -17,20 +17,20 @@
     />
     <style>
       :root {
-        --bg: #edf0f3;
+        --bg: #f4eee3;
         --panel: #ffffff;
-        --panel-2: #f5f7f9;
-        --ink: #12161b;
-        --ink-2: #39414b;
-        --muted: #6a7380;
-        --line: #d8dde4;
+        --panel-2: #faf6ef;
+        --ink: #2b2622;
+        --ink-2: #4a423a;
+        --muted: #7a6e62;
+        --line: #e4dacb;
         --accent: #c8731a;
         --accent-soft: #fbead5;
         --bad: #b8392b;
         --bad-soft: #f8e1dd;
         --good: #2c7a57;
-        --chip: #e3e7ec;
-        --chip-on: #12161b;
+        --chip: #eadfcc;
+        --chip-on: #2b2622;
         --chip-on-ink: #ffffff;
         --bezel: #0d0f12;
         --shadow:
@@ -454,7 +454,7 @@
           var(--display), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
           sans-serif;
         font-weight: 700;
-        font-size: clamp(30px, 4.6vw, 50px);
+        font-size: clamp(32px, 5vw, 56px);
         line-height: 1.08;
         letter-spacing: -0.02em;
         margin: 8px 0 14px;
@@ -758,6 +758,79 @@
         outline: 2px solid var(--accent);
         outline-offset: 2px;
       }
+      .hero-go {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 12px;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .go {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+      }
+      .go:hover {
+        filter: brightness(1.06);
+      }
+      .go:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 2px;
+      }
+      .sect {
+        margin-top: 56px;
+      }
+      .sect > h2 {
+        font-family:
+          var(--display), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          sans-serif;
+        font-size: 22px;
+        margin: 0 0 14px;
+        letter-spacing: -0.015em;
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .src,
+      .stepc {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px 16px;
+        box-shadow: var(--shadow);
+      }
+      .src b,
+      .stepc b {
+        display: block;
+        font-size: 16px;
+      }
+      .src span,
+      .stepc span {
+        display: block;
+        color: var(--ink-2);
+        font-size: 14px;
+        margin-top: 2px;
+      }
+      .stepc i {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font: 700 15px var(--mono);
+        margin-bottom: 10px;
+      }
       .fine {
         margin: 28px 0 0;
         font-size: 12.5px;
@@ -802,10 +875,19 @@
         .cta {
           grid-template-columns: minmax(0, 1fr);
         }
+        .grid3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
       @media (max-width: 520px) {
         .page {
           padding: 16px 16px 36px;
+        }
+        .grid3 {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        #t-srcs .grid3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -851,7 +933,10 @@
             <div class="mono" id="t-when"></div>
             <h1 id="t-h1"></h1>
             <p class="lede" id="t-lede"></p>
-            <a class="watch" id="t-video" href="#demo"></a>
+            <div class="hero-go">
+              <a class="go" id="t-go" href="#t-cta"></a>
+              <a class="watch" id="t-video" href="#demo"></a>
+            </div>
             <div class="badges" id="t-badges"></div>
           </div>
           <div class="phone-wrap">
@@ -861,6 +946,8 @@
             <div class="cap" id="t-cap"></div>
           </div>
         </section>
+        <section class="sect" id="t-srcs"></section>
+        <section class="sect" id="t-how"></section>
         <section class="demo" id="demo">
           <h2 id="t-demo"></h2>
           <video id="vid" controls playsinline preload="none"></video>
@@ -1299,6 +1386,22 @@
         const T = {
           en: {
             when: "Every evening · 21:00 unless you pick another time",
+            go: "Get started",
+            srcsH: "Where it reads",
+            srcs: [
+              ["Wilma", "School messages, exams and notices"],
+              ["eVaka", "Public daycare"],
+              ["Eepos", "Music and art schools"],
+              ["MyClub", "Club calendars"],
+              ["School email", "Mail from school and clubs in Gmail"],
+              ["Parent groups", "The WhatsApp groups you pick"],
+            ],
+            howH: "How it works",
+            how: [
+              ["It reads in the evening", "At the time you pick, it reads the day’s new messages. It only reads and never replies."],
+              ["An AI writes one Brief", "For each kid: what to know, what to do and by when."],
+              ["It lands in both inboxes", "Each in your own language, with new events attached for your calendar."],
+            ],
             h1: "One short email every evening about your kids’ school and clubs",
             lede: "Parent Recap reads school mail, Wilma, WhatsApp parent groups, club calendars and music and art school lessons and concerts (Eepos), and emails you and your partner what to know, what to do and by when, each in your own language.",
             badges: [
@@ -1364,6 +1467,22 @@
           },
           fi: {
             when: "Joka ilta · klo 21.00, ellet valitse toista aikaa",
+            go: "Aloita",
+            srcsH: "Mistä se lukee",
+            srcs: [
+              ["Wilma", "Koulun viestit, kokeet ja tiedotteet"],
+              ["eVaka", "Kunnallinen varhaiskasvatus"],
+              ["Eepos", "Musiikki- ja taidekoulut"],
+              ["MyClub", "Seurojen kalenterit"],
+              ["Koulun sähköposti", "Koulun ja harrastusten viestit Gmailissa"],
+              ["Vanhempien ryhmät", "Valitsemasi WhatsApp-ryhmät"],
+            ],
+            howH: "Näin se toimii",
+            how: [
+              ["Se lukee illalla", "Valitsemaasi aikaan se lukee päivän uudet viestit. Se vain lukee eikä koskaan vastaa."],
+              ["Tekoäly kirjoittaa yhden koosteen", "Lapsittain: mitä pitää tietää, mitä tehdä ja mihin mennessä."],
+              ["Kooste tulee molempien sähköpostiin", "Kummallekin omalla kielellään, uudet tapahtumat liitteenä kalenteria varten."],
+            ],
             h1: "Joka ilta yksi lyhyt sähköposti lastesi koulusta ja harrastuksista",
             lede: "Parent Recap lukee koulun sähköpostit, Wilman, vanhempien WhatsApp-ryhmät, seurojen kalenterit sekä musiikki- ja taidekoulujen tunnit ja konsertit (Eepos) ja lähettää sinulle ja kumppanillesi, kummallekin omalla kielellään, mitä pitää tietää, mitä tehdä ja mihin mennessä.",
             badges: [
@@ -1429,6 +1548,22 @@
           },
           zh: {
             when: "每天晚上 · 默认 21:00，时间可以自己选",
+            go: "立即安装",
+            srcsH: "它读这些地方的消息",
+            srcs: [
+              ["Wilma", "学校消息、考试和通知"],
+              ["eVaka", "公立幼儿园"],
+              ["Eepos", "音乐和艺术学校"],
+              ["MyClub", "俱乐部日程"],
+              ["学校邮件", "Gmail 里学校和兴趣班的邮件"],
+              ["家长群", "你选的 WhatsApp 群"],
+            ],
+            howH: "它怎么工作",
+            how: [
+              ["晚上自动读一遍", "到了你选的时间，它读当天的新消息。只读不写，不会替你回复。"],
+              ["AI 写成一封日报", "按孩子分开写：要知道什么、要做什么、哪天之前。"],
+              ["发到你和伴侣的邮箱", "各用自己的语言，新日程附在邮件里，点一下就进日历。"],
+            ],
             h1: "每天晚上一封简短的邮件，告诉你孩子学校和兴趣班的事",
             lede: "Parent Recap 读学校邮件、Wilma、WhatsApp 家长群、俱乐部日历和音乐艺术学校的课程与演出（Eepos），把要知道什么、要做什么、什么时候之前做，发到你和伴侣的邮箱，各用自己的语言。",
             badges: [
@@ -1590,6 +1725,23 @@
           document.getElementById("t-lede").textContent = t.lede;
           document.getElementById("t-video").innerHTML =
             '<i aria-hidden="true">▶</i>' + t.video;
+          document.getElementById("t-go").textContent = t.go;
+          document.getElementById("t-srcs").innerHTML =
+            "<h2>" +
+            t.srcsH +
+            '</h2><div class="grid3">' +
+            t.srcs
+              .map(([a, b]) => '<div class="src"><b>' + a + "</b><span>" + b + "</span></div>")
+              .join("") +
+            "</div>";
+          document.getElementById("t-how").innerHTML =
+            "<h2>" +
+            t.howH +
+            '</h2><div class="grid3">' +
+            t.how
+              .map(([a, b], i) => '<div class="stepc"><i>' + (i + 1) + "</i><b>" + a + "</b><span>" + b + "</span></div>")
+              .join("") +
+            "</div>";
           document.getElementById("t-demo").textContent = t.demo;
           // The video is in Chinese and English; Finnish readers get the English one.
           const v = lang === "zh" ? "zh" : "en";
