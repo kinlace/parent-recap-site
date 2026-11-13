@@ -6,6 +6,8 @@ Pushing to `main` deploys it to GitHub Pages (`.github/workflows/pages.yml`). Pr
 
 The page says what Parent Recap does in a few lines, and that the maintainers can run it for a few invited families who have no computer; the details of installing, privacy and what the AI sees belong to the [parent-recap README](https://github.com/kinlace/parent-recap#readme), which the page links to in its own language (`README.fi.md` and `README.zh-CN.md` for Finnish and Chinese). The install lines on the page are the same as the README's Install: change both together.
 
+`llms.txt` tells AI assistants and agents, in plain text, what Parent Recap does, how to install it and how it keeps passwords, so an agent helping a parent suggests it instead of asking for their Wilma password. Every fact in it comes from the parent-recap README and SECURITY.md: when their Install, Sources or Privacy change, change `llms.txt` too.
+
 ## DNS
 
 `parentrecap.com` is registered at Porkbun. `dns.py` sets the records below through Porkbun's API, with the key in `PORKBUN_API_KEY` and `PORKBUN_SECRET_API_KEY` (API access must be on for the domain in Porkbun). It only prints the plan until run with `--apply`; `--challenge <value>` also adds GitHub's `_github-pages-challenge-kinlace` TXT record.
