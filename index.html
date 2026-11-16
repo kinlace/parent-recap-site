@@ -14,8 +14,9 @@
     />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23C8731A'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%232b2622'/%3E%3Cpath d='M13 17h38M19 28h26M25 39h14' fill='none' stroke='%23f4eee3' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='50' r='4.2' fill='%23efa24a'/%3E%3C/svg%3E"
     />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <style>
       :root {
         --bg: #f4eee3;
@@ -413,11 +414,10 @@
         align-items: center;
         gap: 8px;
       }
-      .brand i {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--accent);
+      .brand svg {
+        width: 26px;
+        height: 26px;
+        flex: none;
       }
       .segs {
         display: inline-flex;
@@ -918,7 +918,20 @@
   <body>
     <div class="page">
       <header class="top">
-        <div class="brand"><i aria-hidden="true"></i>Parent Recap</div>
+        <div class="brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="15" fill="#2b2622" />
+            <path
+              d="M13 17h38M19 28h26M25 39h14"
+              fill="none"
+              stroke="#f4eee3"
+              stroke-width="5"
+              stroke-linecap="round"
+            />
+            <circle cx="32" cy="50" r="4.2" fill="#efa24a" />
+          </svg>
+          Parent Recap
+        </div>
         <div class="lang">
           <span class="more" id="t-more"></span>
           <div class="segs" role="group" aria-label="Language">
